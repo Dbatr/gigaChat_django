@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat with GigaChat</title>
+    <link rel="stylesheet" href="{% static 'css/chat.css' %}">
+</head>
+<body>
+    <div class="chat-box">
+        <h1>Chat with GigaChat</h1>
+        {% for msg in messages %}
+            <div class="message {% if msg.role == 'user' %}user{% else %}ai{% endif %}">
+                <p>{{ msg.content }}</p>
+            </div>
+        {% endfor %}
+        <form method="post">
+            {% csrf_token %}
+            <label for="message">Your message:</label>
+                <textarea id="message" name="message" rows="4" cols="50"></textarea><br>
+            <button type="submit">Send</button>
+        </form>
+    </div>
+</body>
+</html>
